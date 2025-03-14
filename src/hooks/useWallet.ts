@@ -1,10 +1,11 @@
 import { useState } from "react"
 import { ethers } from "ethers"
+import toast from "react-hot-toast"
 export const useWallet = () => {
   const [account, setAccount] = useState(null)
   const connectWallet = async () => {
     if (!window.ethereum) {
-      alert("Please install MetaMask")
+      toast.error("Please install MetaMask")
       return
     }
     try {
@@ -13,7 +14,7 @@ export const useWallet = () => {
       setAccount(accounts[0])
     } catch (error) {
       console.error(error)
-      alert("Failed to connect wallet")
+      toast.error("Failed to connect wallet")
     }
   }
   return { account, connectWallet }
